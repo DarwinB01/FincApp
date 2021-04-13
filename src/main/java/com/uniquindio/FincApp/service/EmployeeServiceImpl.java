@@ -1,22 +1,56 @@
 package com.uniquindio.FincApp.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.uniquindio.FincApp.dao.ICultivationDao;
 import com.uniquindio.FincApp.dao.IEmployeeDao;
+import com.uniquindio.FincApp.dao.IEstateDao;
+import com.uniquindio.FincApp.dto.EmployeeDTO;
+import com.uniquindio.FincApp.model.Cultivation;
 import com.uniquindio.FincApp.model.Employee;
+import com.uniquindio.FincApp.model.Estate;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Autowired
 	private IEmployeeDao employeeDao;
-	
+	@Autowired
+	private IEstateDao fincaDao;
+	@Autowired
+	private ICultivationDao cultivoDao;
+	@Autowired
+	ObjectMapper objectMapper;
+
 	@Override
-	public Employee save(Employee employee) {
-		return employeeDao.save(employee);
+	public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
+		Estate finca = fincaDao.findById(employeeDTO.getFinca()).get();
+		Cultivation cultivo = cultivoDao.findById(employeeDTO.getCultivo()).get();
+		if (finca != null && cultivo != null) {
+			try {
+				Employee employee = new Employee();
+				employee.setFinca(finca);
+				employee.setCultivo(cultivo);
+				employee.setCedula(employeeDTO.getCedula());
+				employee.setCreateAt(employeeDTO.getCreateAt());
+				employee.setEdad(employeeDTO.getEdad());
+				employee.setHorario(employeeDTO.getHorario());
+				employee.setNombre(employeeDTO.getNombre());
+				employee.setSueldo(employeeDTO.getSueldo());
+				employeeDao.save(employee);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return employeeDTO;
 	}
 
 	@Override
@@ -25,13 +59,36 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	}
 
 	@Override
-	public List<Employee> findAll() {
-		return (List<Employee>) employeeDao.findAll();
+	public List<EmployeeDTO> findAll() {
+		List<Employee> employee = new ArrayList<>();
+		employeeDao.findAll().forEach(employee::add);
+		List<EmployeeDTO> response = employee.stream().map(employeeDTO -> {
+			return new EmployeeDTO(employeeDTO.getCedula(), employeeDTO.getCreateAt(), employeeDTO.getCultivo(),
+					employeeDTO.getEdad(), employeeDTO.getFinca(), employeeDTO.getHorario(), employeeDTO.getNombre(),
+					employeeDTO.getSueldo());
+		}).collect(Collectors.toList());
+
+		return response;
 	}
 
 	@Override
-	public Employee findById(Long cedula) {
-		return employeeDao.findById(cedula).orElse(null);
+	public EmployeeDTO findById(Long cedula) {
+
+		return entityToDTO(employeeDao.findById(cedula).orElse(null));
+	}
+
+	public EmployeeDTO entityToDTO(Employee employee) {
+		EmployeeDTO employeeDTO = new EmployeeDTO();
+		employeeDTO.setFinca(employee.getFinca().getIdfinca());
+		employeeDTO.setCultivo(employee.getCultivo().getIdcultivo());
+		employeeDTO.setCedula(employee.getCedula());
+		employeeDTO.setCreateAt(employee.getCreateAt());
+		employeeDTO.setEdad(employee.getEdad());
+		employeeDTO.setHorario(employee.getHorario());
+		employeeDTO.setNombre(employee.getNombre());
+		employeeDTO.setSueldo(employee.getSueldo());
+
+		return employeeDTO;
 	}
 
 }

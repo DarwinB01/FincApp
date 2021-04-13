@@ -1,67 +1,56 @@
-/**
- * 
- */
-package com.uniquindio.FincApp.model;
+package com.uniquindio.FincApp.dto;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.sun.istack.NotNull;
+import com.uniquindio.FincApp.model.Cultivation;
+import com.uniquindio.FincApp.model.Estate;
 
-/**
- * Clase que representa a un trabajador dentro de la finca
- * 
- * @author Darwin Bonilla
- * 
- *
- */
-@Entity
-@Table(name = "trabajador")
-public class Employee implements Serializable {
-
-	@Id
+@JsonInclude(Include.NON_NULL)
+public class EmployeeDTO {
+	
 	private Long cedula;
 
-	@NotNull
-	@Column(nullable = false)
 	private String nombre;
 
-	@NotNull
-	@Column(nullable = false)
 	private String horario;
 
-	@NotNull
-	@Column(nullable = false)
 	private Long sueldo;
 
-	@NotNull
-	@Column(nullable = false)
 	private int edad;
 
-	@ManyToOne
-	@NotNull
-	@JoinColumn(name = "finca_idfinca")
-	private Estate finca;
+	private Long finca;
 
-	@ManyToOne
-	@NotNull
-	@JoinColumn(name = "cultivo_idcultivo")
-	private Cultivation cultivo;
+	private Long cultivo;
 
-	@NotNull
-	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE)
 	private Date createAt;
+
+	public EmployeeDTO() {
+		super();
+	}
+	public EmployeeDTO(Long cedula, Date createAt, Cultivation cultivo, int edad, Estate finca, String horario,
+			String nombre, Long sueldo) {
+		
+		super();
+		this.cedula = cedula;
+		this.nombre = nombre;
+		this.horario = horario;
+		this.sueldo = sueldo;
+		this.edad = edad;
+		this.finca = finca.getIdfinca();
+		this.cultivo = cultivo.getIdcultivo();
+		this.createAt = createAt;
+		
+	}
 
 	public Long getCedula() {
 		return cedula;
@@ -103,19 +92,19 @@ public class Employee implements Serializable {
 		this.edad = edad;
 	}
 
-	public Estate getFinca() {
+	public Long getFinca() {
 		return finca;
 	}
 
-	public void setFinca(Estate finca) {
+	public void setFinca(Long finca) {
 		this.finca = finca;
 	}
 
-	public Cultivation getCultivo() {
+	public Long getCultivo() {
 		return cultivo;
 	}
 
-	public void setCultivo(Cultivation cultivo) {
+	public void setCultivo(Long cultivo) {
 		this.cultivo = cultivo;
 	}
 
@@ -126,5 +115,7 @@ public class Employee implements Serializable {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
+	
 
 }

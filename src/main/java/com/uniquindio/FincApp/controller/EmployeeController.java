@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uniquindio.FincApp.dto.EmployeeDTO;
 import com.uniquindio.FincApp.model.Employee;
 import com.uniquindio.FincApp.service.IEmployeeService;
 
@@ -22,8 +23,8 @@ public class EmployeeController {
 	private IEmployeeService employeeService;
 	
 	@PostMapping("/registrarEmpleado")
-	public Employee saveEmployee(@RequestBody Employee employee) {
-		return employeeService.save(employee);
+	public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employee) {
+		return employeeService.saveEmployee(employee);
 	}
 	
 	@DeleteMapping("/eliminarEmpleadoPorCedula/{cedula}")
@@ -32,12 +33,12 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/buscarEmpleadoPorCedula/{cedula}")
-	public Employee findEmployee(@PathVariable Long cedula) {
+	public EmployeeDTO findEmployee(@PathVariable Long cedula) {
 		return employeeService.findById(cedula);
 	}
 	
 	@GetMapping("/buscarTodosLosEmpleados")
-	public List<Employee> findAllEmployee(){
+	public List<EmployeeDTO> findAllEmployee(){
 		return employeeService.findAll();
 	}
 }
