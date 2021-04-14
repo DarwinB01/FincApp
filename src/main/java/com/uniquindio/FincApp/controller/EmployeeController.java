@@ -1,8 +1,10 @@
 package com.uniquindio.FincApp.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import com.uniquindio.FincApp.dto.EmployeeDTO;
 import com.uniquindio.FincApp.model.Employee;
 import com.uniquindio.FincApp.service.IEmployeeService;
 
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -22,22 +25,23 @@ public class EmployeeController {
 	@Autowired
 	private IEmployeeService employeeService;
 	
-	@PostMapping("/registrarEmpleado")
+	@PostMapping("/trabajadores")
 	public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employee) {
+		employee.setCreateAt(new Date());
 		return employeeService.saveEmployee(employee);
 	}
 	
-	@DeleteMapping("/eliminarEmpleadoPorCedula/{cedula}")
+	@DeleteMapping("/trabajadores/{cedula}")
 	public void deleteEmployeeById(@PathVariable Long cedula) {
 		employeeService.deleteById(cedula);
 	}
 	
-	@GetMapping("/buscarEmpleadoPorCedula/{cedula}")
+	@GetMapping("/trabajadores/{cedula}")
 	public EmployeeDTO findEmployee(@PathVariable Long cedula) {
 		return employeeService.findById(cedula);
 	}
 	
-	@GetMapping("/buscarTodosLosEmpleados")
+	@GetMapping("/trabajadores")
 	public List<EmployeeDTO> findAllEmployee(){
 		return employeeService.findAll();
 	}

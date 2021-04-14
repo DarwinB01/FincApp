@@ -36,16 +36,16 @@ public class Employee implements Serializable {
 	@Column(nullable = false)
 	private String nombre;
 
-	@NotNull
-	@Column(nullable = false)
+	
+	@Column(nullable = true)
 	private String horario;
 
 	@NotNull
 	@Column(nullable = false)
 	private Long sueldo;
 
-	@NotNull
-	@Column(nullable = false)
+	
+	@Column(nullable = true)
 	private int edad;
 
 	@ManyToOne
@@ -58,10 +58,27 @@ public class Employee implements Serializable {
 	@JoinColumn(name = "cultivo_idcultivo")
 	private Cultivation cultivo;
 
-	@NotNull
+	
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
+	
+	
+	@NotNull
+	@Column(nullable = false)
+	private String apellido;
+	
+	@NotNull
+	@Column(nullable = false)
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public Long getCedula() {
 		return cedula;
@@ -125,6 +142,14 @@ public class Employee implements Serializable {
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 }
