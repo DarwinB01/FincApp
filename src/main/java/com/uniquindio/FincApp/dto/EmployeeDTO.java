@@ -33,12 +33,14 @@ public class EmployeeDTO {
 	private Long cultivo;
 
 	private Date createAt;
+	
+	private String apellido;
 
 	public EmployeeDTO() {
 		super();
 	}
 	public EmployeeDTO(Long cedula, Date createAt, Cultivation cultivo, int edad, Estate finca, String horario,
-			String nombre, Long sueldo) {
+			String nombre, Long sueldo, String apellido) {
 		
 		super();
 		this.cedula = cedula;
@@ -49,6 +51,7 @@ public class EmployeeDTO {
 		this.finca = finca.getIdfinca();
 		this.cultivo = cultivo.getIdcultivo();
 		this.createAt = createAt;
+		this.apellido = apellido;
 		
 	}
 
@@ -115,7 +118,11 @@ public class EmployeeDTO {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 	
-	
-
 }

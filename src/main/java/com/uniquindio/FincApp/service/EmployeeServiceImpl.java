@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,6 +46,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 				employee.setHorario(employeeDTO.getHorario());
 				employee.setNombre(employeeDTO.getNombre());
 				employee.setSueldo(employeeDTO.getSueldo());
+				employee.setApellido(employeeDTO.getApellido());
 				employeeDao.save(employee);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -65,11 +68,18 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		List<EmployeeDTO> response = employee.stream().map(employeeDTO -> {
 			return new EmployeeDTO(employeeDTO.getCedula(), employeeDTO.getCreateAt(), employeeDTO.getCultivo(),
 					employeeDTO.getEdad(), employeeDTO.getFinca(), employeeDTO.getHorario(), employeeDTO.getNombre(),
-					employeeDTO.getSueldo());
+					employeeDTO.getSueldo(),employeeDTO.getApellido());
 		}).collect(Collectors.toList());
 
 		return response;
 	}
+	
+//	@Override
+//	public Page<EmployeeDTO> findAll(Pageable pageable) {
+//		Page<Employee> employee = employeeDao.findAll(pageable);	
+//		employee.
+//		return null;
+//	}
 
 	@Override
 	public EmployeeDTO findById(Long cedula) {
@@ -87,6 +97,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		employeeDTO.setHorario(employee.getHorario());
 		employeeDTO.setNombre(employee.getNombre());
 		employeeDTO.setSueldo(employee.getSueldo());
+		employeeDTO.setApellido(employee.getApellido());
 
 		return employeeDTO;
 	}

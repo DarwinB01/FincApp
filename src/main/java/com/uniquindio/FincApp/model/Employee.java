@@ -39,6 +39,10 @@ public class Employee implements Serializable {
 	@NotNull
 	@Column(nullable = false)
 	private String horario;
+	
+	@NotNull
+	@Column(nullable = false)
+	private String apellido;
 
 	@NotNull
 	@Column(nullable = false)
@@ -127,4 +131,13 @@ public class Employee implements Serializable {
 		this.createAt = createAt;
 	}
 
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	
 }
