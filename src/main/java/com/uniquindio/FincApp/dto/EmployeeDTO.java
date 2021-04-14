@@ -17,10 +17,12 @@ import com.uniquindio.FincApp.model.Estate;
 
 @JsonInclude(Include.NON_NULL)
 public class EmployeeDTO {
-	
+
 	private Long cedula;
 
 	private String nombre;
+
+	private String apellido;
 
 	private String horario;
 
@@ -33,15 +35,16 @@ public class EmployeeDTO {
 	private Long cultivo;
 
 	private Date createAt;
-	
-	private String apellido;
+
+	private String email;
 
 	public EmployeeDTO() {
 		super();
 	}
+
 	public EmployeeDTO(Long cedula, Date createAt, Cultivation cultivo, int edad, Estate finca, String horario,
-			String nombre, Long sueldo, String apellido) {
-		
+			String nombre, Long sueldo, String apellido, String email) {
+
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -52,7 +55,16 @@ public class EmployeeDTO {
 		this.cultivo = cultivo.getIdcultivo();
 		this.createAt = createAt;
 		this.apellido = apellido;
-		
+		this.email = email;
+
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Long getCedula() {
@@ -118,11 +130,13 @@ public class EmployeeDTO {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+
 	public String getApellido() {
 		return apellido;
 	}
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
+
 }

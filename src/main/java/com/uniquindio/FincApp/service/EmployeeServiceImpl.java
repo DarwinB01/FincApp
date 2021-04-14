@@ -33,7 +33,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
-		Estate finca = fincaDao.findById(employeeDTO.getFinca()).get();
+		Estate finca = fincaDao.findById(1L).get();
+		finca.setIdfinca(1L);
 		Cultivation cultivo = cultivoDao.findById(employeeDTO.getCultivo()).get();
 		if (finca != null && cultivo != null) {
 			try {
@@ -47,6 +48,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 				employee.setNombre(employeeDTO.getNombre());
 				employee.setSueldo(employeeDTO.getSueldo());
 				employee.setApellido(employeeDTO.getApellido());
+				employee.setEmail(employeeDTO.getEmail());
 				employeeDao.save(employee);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -68,7 +70,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		List<EmployeeDTO> response = employee.stream().map(employeeDTO -> {
 			return new EmployeeDTO(employeeDTO.getCedula(), employeeDTO.getCreateAt(), employeeDTO.getCultivo(),
 					employeeDTO.getEdad(), employeeDTO.getFinca(), employeeDTO.getHorario(), employeeDTO.getNombre(),
-					employeeDTO.getSueldo(),employeeDTO.getApellido());
+					employeeDTO.getSueldo(), employeeDTO.getApellido(),employeeDTO.getEmail());
 		}).collect(Collectors.toList());
 
 		return response;
@@ -98,6 +100,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		employeeDTO.setNombre(employee.getNombre());
 		employeeDTO.setSueldo(employee.getSueldo());
 		employeeDTO.setApellido(employee.getApellido());
+		employeeDTO.setEmail(employee.getEmail());
 
 		return employeeDTO;
 	}
