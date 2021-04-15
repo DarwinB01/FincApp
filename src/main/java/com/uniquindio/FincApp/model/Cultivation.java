@@ -36,13 +36,11 @@ public class Cultivation implements Serializable{
 	@NotNull
 	@Column(nullable = false)
 	private String tipoCultivo;
-	
-	@NotNull
-	@Column(nullable = false)
+		
+	@Column(nullable = true)
 	private int cantidadDeMatas;
 	
-	@NotNull
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Date fecha;
 	
 	@OneToMany(mappedBy="cultivo", cascade=CascadeType.ALL)

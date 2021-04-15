@@ -76,13 +76,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		return response;
 	}
 	
-//	@Override
-//	public Page<EmployeeDTO> findAll(Pageable pageable) {
-//		Page<Employee> employee = employeeDao.findAll(pageable);	
-//		employee.
-//		return null;
-//	}
-
 	@Override
 	public EmployeeDTO findById(Long cedula) {
 
