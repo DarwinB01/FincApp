@@ -21,30 +21,33 @@ import com.sun.istack.NotNull;
 /**
  * 
  * Clase que representa un cultivo dentro de la finca
- *  
+ * 
  * @author Darwin Bonilla
  *
  */
 @Entity
 @Table(name = "cultivo")
-public class Cultivation implements Serializable{
+public class Cultivation implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idcultivo;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String tipoCultivo;
-		
+
 	@Column(nullable = true)
 	private int cantidadDeMatas;
-	
+
 	@Column(nullable = true)
 	private Date fecha;
-	
-	@OneToMany(mappedBy="cultivo", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "cultivo", cascade = CascadeType.ALL)
 	private List<Employee> trabajadores;
+
+	@OneToMany(mappedBy = "cultivo", cascade = CascadeType.ALL)
+	private List<Harvest> cosechas;
 
 	public Long getIdcultivo() {
 		return idcultivo;
@@ -85,6 +88,13 @@ public class Cultivation implements Serializable{
 	public void setTrabajadores(List<Employee> trabajadores) {
 		this.trabajadores = trabajadores;
 	}
-	
-	
+
+	public List<Harvest> getCosechas() {
+		return cosechas;
+	}
+
+	public void setCosechas(List<Harvest> cosechas) {
+		this.cosechas = cosechas;
+	}
+
 }
