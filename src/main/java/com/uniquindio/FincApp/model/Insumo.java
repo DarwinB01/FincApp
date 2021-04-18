@@ -1,9 +1,4 @@
-/**
- * 
- */
 package com.uniquindio.FincApp.model;
-
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,48 +11,39 @@ import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
-/**
- * Clase que representa los controles que se deben tomar dentro de la finca
- * 
- * @author Darwin Bonilla
- * 
- */
 @Entity
-@Table(name = "control")
-public class Control {
-	
+@Table(name = "insumo")
+public class Insumo {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idcontrol;
-	
+	private Long idinsumo;
+
 	@NotNull
 	@Column(nullable = false)
 	private String tipo;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String nombre;
 
 	@Column(nullable = true)
-	private String descripcion;
-	
-	@Column(nullable = true)
-	private Date fecha;
-	
+	private int cantidad;
+
 	@Column(nullable = true)
 	private Long precio;
-	
+
 	@ManyToOne
 	@NotNull
-	@JoinColumn(name = "cultivo_idcultivo")
-	private Cultivation cultivo;
+	@JoinColumn(name = "finca_idfinca")
+	private Estate finca;
 
-	public Long getIdcontrol() {
-		return idcontrol;
+	public Long getIdinsumo() {
+		return idinsumo;
 	}
 
-	public void setIdcontrol(Long idcontrol) {
-		this.idcontrol = idcontrol;
+	public void setIdinsumo(Long idinsumo) {
+		this.idinsumo = idinsumo;
 	}
 
 	public String getTipo() {
@@ -76,20 +62,12 @@ public class Control {
 		this.nombre = nombre;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public int getCantidad() {
+		return cantidad;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	public Long getPrecio() {
@@ -100,13 +78,12 @@ public class Control {
 		this.precio = precio;
 	}
 
-	public Cultivation getCultivo() {
-		return cultivo;
+	public Estate getFinca() {
+		return finca;
 	}
 
-	public void setCultivo(Cultivation cultivo) {
-		this.cultivo = cultivo;
+	public void setFinca(Estate finca) {
+		this.finca = finca;
 	}
-	
-	
+
 }

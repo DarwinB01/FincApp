@@ -28,9 +28,6 @@ public class Position {
 	@NotNull
 	@Column(nullable = false)
 	private String tipoCargo;
-	@NotNull
-	@Column(nullable = false)
-	private String cultivo;
 	@ManyToOne
 	@NotNull
 	@JoinColumn(name = "trabajador_cedula")
@@ -46,12 +43,6 @@ public class Position {
 	}
 	public void setTipoCargo(String tipoCargo) {
 		this.tipoCargo = tipoCargo;
-	}
-	public String getCultivo() {
-		return cultivo;
-	}
-	public void setCultivo(String cultivo) {
-		this.cultivo = cultivo;
 	}
 	public Employee getTrabajadorCedula() {
 		return trabajadorCedula;

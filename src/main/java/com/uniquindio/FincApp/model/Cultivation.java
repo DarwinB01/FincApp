@@ -49,6 +49,9 @@ public class Cultivation implements Serializable {
 	@OneToMany(mappedBy = "cultivo", cascade = CascadeType.ALL)
 	private List<Harvest> cosechas;
 
+	@OneToMany(mappedBy = "cultivo", cascade = CascadeType.ALL)
+	private List<Control> controles;
+	
 	public Long getIdcultivo() {
 		return idcultivo;
 	}
@@ -97,4 +100,13 @@ public class Cultivation implements Serializable {
 		this.cosechas = cosechas;
 	}
 
+	public List<Control> getControles() {
+		return controles;
+	}
+
+	public void setControles(List<Control> controles) {
+		this.controles = controles;
+	}
+
+	
 }

@@ -24,36 +24,39 @@ import com.sun.istack.NotNull;
  */
 @Entity
 @Table(name = "finca")
-public class Estate implements Serializable{
+public class Estate implements Serializable {
 
 	@Id
 	private Long idfinca;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String nombre;
-	
+
 	@NotNull
 	private String ubicacion;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String hectareas;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private int arriendo;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private int servicios;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String usuario_cedula;
-	
-	@OneToMany(mappedBy="finca", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "finca", cascade = CascadeType.ALL)
 	private List<Employee> trabajadores;
+
+	@OneToMany(mappedBy = "finca", cascade = CascadeType.ALL)
+	private List<Insumo> insumos;
 
 	public Long getIdfinca() {
 		return idfinca;
@@ -118,6 +121,13 @@ public class Estate implements Serializable{
 	public void setTrabajadores(List<Employee> trabajadores) {
 		this.trabajadores = trabajadores;
 	}
-	
-	
+
+	public List<Insumo> getInsumos() {
+		return insumos;
+	}
+
+	public void setInsumos(List<Insumo> insumos) {
+		this.insumos = insumos;
+	}
+
 }

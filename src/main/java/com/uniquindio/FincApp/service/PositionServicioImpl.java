@@ -15,7 +15,7 @@ import com.uniquindio.FincApp.model.Employee;
 import com.uniquindio.FincApp.model.Position;
 
 @Service
-public class PositionServicioImpl implements IPositionService{
+public class PositionServicioImpl implements IPositionService {
 
 	@Autowired
 	ObjectMapper objectMapper;
@@ -23,7 +23,7 @@ public class PositionServicioImpl implements IPositionService{
 	private IPositionDao positionDao;
 	@Autowired
 	private IEmployeeDao employeeDao;
-	
+
 	@Override
 	public void deleteById(Long idCargo) {
 		positionDao.deleteById(idCargo);
@@ -34,7 +34,7 @@ public class PositionServicioImpl implements IPositionService{
 		List<Position> position = new ArrayList<>();
 		positionDao.findAll().forEach(position::add);
 		List<PositionDTO> response = position.stream().map(positionDTO -> {
-			return new PositionDTO(positionDTO.getIdCargo(), positionDTO.getTipoCargo(), positionDTO.getCultivo(),
+			return new PositionDTO(positionDTO.getIdCargo(), positionDTO.getTipoCargo(),
 					positionDTO.getTrabajadorCedula().getCedula());
 		}).collect(Collectors.toList());
 
@@ -49,12 +49,11 @@ public class PositionServicioImpl implements IPositionService{
 	@Override
 	public PositionDTO savePosition(PositionDTO cargoDTO) {
 		Employee employee = employeeDao.findById(cargoDTO.getTrabajadorCedula()).get();
-		if(employee != null) {
+		if (employee != null) {
 			try {
 				Position cargo = new Position();
 				cargo.setIdCargo(cargoDTO.getIdCargo());
 				cargo.setTipoCargo(cargoDTO.getTipoCargo());
-				cargo.setCultivo(cargoDTO.getCultivo());
 				cargo.setTrabajadorCedula(employee);
 				positionDao.save(cargo);
 			} catch (Exception e) {
@@ -67,11 +66,10 @@ public class PositionServicioImpl implements IPositionService{
 	public PositionDTO entityToDTO(Position cargo) {
 		PositionDTO cargoDTO = new PositionDTO();
 		cargoDTO.setTrabajadorCedula(cargo.getTrabajadorCedula().getCedula());
-		cargoDTO.setCultivo(cargo.getCultivo());
 		cargoDTO.setTipoCargo(cargo.getTipoCargo());
 		cargoDTO.setIdCargo(cargo.getIdCargo());
 
 		return cargoDTO;
 	}
-	
+
 }

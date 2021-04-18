@@ -58,7 +58,6 @@ public class PositionController {
 			try {
 				positionDTO.setTipoCargo(peticion.getTipoCargo());			
 				positionDTO.setTrabajadorCedula(peticion.getTrabajadorCedula());
-				positionDTO.setCultivo(peticion.getCultivo());
 
 				positionUpdated = positionService.savePosition(positionDTO);
 				return positionUpdated;

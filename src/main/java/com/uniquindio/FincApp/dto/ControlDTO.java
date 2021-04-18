@@ -1,56 +1,42 @@
-/**
- * 
- */
-package com.uniquindio.FincApp.model;
+package com.uniquindio.FincApp.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import com.sun.istack.NotNull;
+@JsonInclude(Include.NON_NULL)
+public class ControlDTO {
 
-/**
- * Clase que representa los controles que se deben tomar dentro de la finca
- * 
- * @author Darwin Bonilla
- * 
- */
-@Entity
-@Table(name = "control")
-public class Control {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idcontrol;
-	
-	@NotNull
-	@Column(nullable = false)
+
 	private String tipo;
-	
-	@NotNull
-	@Column(nullable = false)
+
 	private String nombre;
 
-	@Column(nullable = true)
 	private String descripcion;
-	
-	@Column(nullable = true)
+
 	private Date fecha;
-	
-	@Column(nullable = true)
+
 	private Long precio;
-	
-	@ManyToOne
-	@NotNull
-	@JoinColumn(name = "cultivo_idcultivo")
-	private Cultivation cultivo;
+
+	private Long cultivo;
+
+	public ControlDTO(Long idcontrol, String tipo, String nombre, String descripcion, Date fecha, Long precio,
+			Long cultivo) {
+		super();
+		this.idcontrol = idcontrol;
+		this.tipo = tipo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.fecha = fecha;
+		this.precio = precio;
+		this.cultivo = cultivo;
+	}
+
+	public ControlDTO() {
+		super();
+	}
 
 	public Long getIdcontrol() {
 		return idcontrol;
@@ -100,13 +86,12 @@ public class Control {
 		this.precio = precio;
 	}
 
-	public Cultivation getCultivo() {
+	public Long getCultivo() {
 		return cultivo;
 	}
 
-	public void setCultivo(Cultivation cultivo) {
+	public void setCultivo(Long cultivo) {
 		this.cultivo = cultivo;
 	}
-	
-	
+
 }

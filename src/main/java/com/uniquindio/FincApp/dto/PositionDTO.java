@@ -11,15 +11,12 @@ public class PositionDTO {
 
 	private String tipoCargo;
 
-	private String cultivo;
-
 	private Long trabajadorCedula;
 
-	public PositionDTO(Long idcargo, String tipoCargo, String cultivo, Long trabajadorCedula) {
+	public PositionDTO(Long idcargo, String tipoCargo, Long trabajadorCedula) {
 		super();
 		this.idcargo = idcargo;
 		this.tipoCargo = tipoCargo;
-		this.cultivo = cultivo;
 		this.trabajadorCedula = trabajadorCedula;
 	}
 
@@ -41,14 +38,6 @@ public class PositionDTO {
 
 	public void setTipoCargo(String tipoCargo) {
 		this.tipoCargo = tipoCargo;
-	}
-
-	public String getCultivo() {
-		return cultivo;
-	}
-
-	public void setCultivo(String cultivo) {
-		this.cultivo = cultivo;
 	}
 
 	public Long getTrabajadorCedula() {
