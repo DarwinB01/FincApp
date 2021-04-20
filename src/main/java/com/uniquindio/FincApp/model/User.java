@@ -21,7 +21,7 @@ import com.sun.istack.NotNull;
  *Para iniciar sesion
  *
  * @author Darwin Bonilla
- *
+ * fg
  */
 
 @Entity
