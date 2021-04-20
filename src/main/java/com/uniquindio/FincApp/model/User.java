@@ -20,7 +20,7 @@ import com.sun.istack.NotNull;
  *Clase que representa a un usuario dentro de la finca
  *
  * @author Darwin Bonilla
- *
+ * fg
  */
 
 @Entity
