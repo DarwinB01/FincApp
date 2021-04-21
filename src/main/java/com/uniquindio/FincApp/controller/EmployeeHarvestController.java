@@ -2,12 +2,9 @@ package com.uniquindio.FincApp.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,56 +15,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.uniquindio.FincApp.dto.EmployeeDTO;
-import com.uniquindio.FincApp.model.Employee;
-import com.uniquindio.FincApp.service.IEmployeeService;
+import com.uniquindio.FincApp.dto.EmployeeHarvestDTO;
+import com.uniquindio.FincApp.service.IEmployeeHarvestService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
-@RequestMapping("/employee")
-public class EmployeeController {
+@RequestMapping("/employeeHarvest")
+public class EmployeeHarvestController {
 
 	@Autowired
-	private IEmployeeService employeeService;
-
-	@PostMapping("/trabajadores")
-	public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employee) {
-		employee.setCreateAt(new Date());
-		return employeeService.saveEmployee(employee);
+	private IEmployeeHarvestService employeeService;
+	
+	@PostMapping("/trabajadoresCosechas")
+	public EmployeeHarvestDTO saveEmployee(@RequestBody EmployeeHarvestDTO employee) {
+		employee.setFecha(new Date());
+		return employeeService.saveEmployeeHarvest(employee);
 	}
 
-	@DeleteMapping("/trabajadores/{cedula}")
+	@DeleteMapping("/trabajadoresCosechas/{cedula}")
 	public void deleteEmployeeById(@PathVariable Long cedula) {
 		employeeService.deleteById(cedula);
 	}
 
-	@GetMapping("/trabajadores/{cedula}")
-	public EmployeeDTO findEmployee(@PathVariable Long cedula) {
+	@GetMapping("/trabajadoresCosechas/{cedula}")
+	public EmployeeHarvestDTO findEmployee(@PathVariable Long cedula) {
 		return employeeService.findById(cedula);
 	}
 
-	@GetMapping("/trabajadores")
-	public List<EmployeeDTO> findAllEmployee() {
+	@GetMapping("/trabajadoresCosechas")
+	public List<EmployeeHarvestDTO> findAllEmployee() {
 		return employeeService.findAll();
 	}
 
-	@PutMapping("/trabajadores/{cedula}")
-	public EmployeeDTO updateEmployee(@RequestBody EmployeeDTO peticion, @PathVariable Long cedula) {
+	@PutMapping("/trabajadoresCosechas/{cedula}")
+	public EmployeeHarvestDTO updateEmployee(@RequestBody EmployeeHarvestDTO peticion, @PathVariable Long cedula) {
 
-		EmployeeDTO employeeDTO = employeeService.findById(cedula);
+		EmployeeHarvestDTO employeeDTO = employeeService.findById(cedula);
 
-		EmployeeDTO employeeUpdated = null;
+		EmployeeHarvestDTO employeeUpdated = null;
 		if (employeeDTO != null) {
 
 			try {
 				employeeDTO.setNombre(peticion.getNombre());
 				employeeDTO.setApellido(peticion.getApellido());
-				employeeDTO.setSueldo(peticion.getSueldo());
-				employeeDTO.setEmail(peticion.getEmail());
+				employeeDTO.setPagoPorDia(peticion.getPagoPorDia());
+				employeeDTO.setDiasDeTrabajo(peticion.getDiasDeTrabajo());
 				employeeDTO.setCultivo(peticion.getCultivo());
-				employeeDTO.setCargo(peticion.getCargo());
 
-				employeeUpdated = employeeService.saveEmployee(employeeDTO);
+				employeeUpdated = employeeService.saveEmployeeHarvest(employeeDTO);
 				return employeeUpdated;
 			} catch (DataAccessException e) {
 				e.printStackTrace();
@@ -75,4 +70,5 @@ public class EmployeeController {
 		}
 		return employeeUpdated;
 	}
+	
 }

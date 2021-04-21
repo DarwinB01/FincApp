@@ -71,8 +71,9 @@ public class Employee implements Serializable {
 	@Column(nullable = false)
 	private String email;
 	
-	@OneToMany(mappedBy="trabajadorCedula", cascade=CascadeType.ALL)
-	private List<Position> cargos;
+	@NotNull
+	@Column(nullable = false)
+	private String cargo;
 
 	public String getEmail() {
 		return email;
@@ -152,6 +153,14 @@ public class Employee implements Serializable {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 }

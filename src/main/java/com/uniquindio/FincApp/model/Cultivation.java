@@ -52,6 +52,9 @@ public class Cultivation implements Serializable {
 	@OneToMany(mappedBy = "cultivo", cascade = CascadeType.ALL)
 	private List<Control> controles;
 	
+	@OneToMany(mappedBy = "cultivo", cascade = CascadeType.ALL)
+	private List<EmployeeHarvest> trabajadoresCosechas;
+	
 	public Long getIdcultivo() {
 		return idcultivo;
 	}
