@@ -29,7 +29,7 @@ import com.sun.istack.NotNull;
  *
  */
 @Entity
-@Table(name = "trabajador")
+@Table(name = "t")
 public class Employee implements Serializable {
 
 	@Id

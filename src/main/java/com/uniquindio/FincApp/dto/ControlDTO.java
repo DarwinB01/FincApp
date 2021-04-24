@@ -21,6 +21,8 @@ public class ControlDTO {
 	private Long precio;
 
 	private Long cultivo;
+	
+	private String nombreCultivo;
 
 	public ControlDTO(Long idcontrol, String tipo, String nombre, String descripcion, Date fecha, Long precio,
 			Long cultivo) {
@@ -32,6 +34,14 @@ public class ControlDTO {
 		this.fecha = fecha;
 		this.precio = precio;
 		this.cultivo = cultivo;
+	}
+	
+	public String getNombreCultivo() {
+		return nombreCultivo;
+	}
+
+	public void setNombreCultivo(String nombreCultivo) {
+		this.nombreCultivo = nombreCultivo;
 	}
 
 	public ControlDTO() {

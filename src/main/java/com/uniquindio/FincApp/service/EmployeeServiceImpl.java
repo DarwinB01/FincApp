@@ -1,6 +1,7 @@
 package com.uniquindio.FincApp.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniquindio.FincApp.dao.ICultivationDao;
 import com.uniquindio.FincApp.dao.IEmployeeDao;
 import com.uniquindio.FincApp.dao.IEstateDao;
+import com.uniquindio.FincApp.dto.CultivationDTO;
 import com.uniquindio.FincApp.dto.EmployeeDTO;
 import com.uniquindio.FincApp.model.Cultivation;
 import com.uniquindio.FincApp.model.Employee;
@@ -30,6 +32,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	private ICultivationDao cultivoDao;
 	@Autowired
 	ObjectMapper objectMapper;
+//	@Autowired
+//	private CultivationDTO cultivoDTO;
 
 	@Override
 	public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
@@ -71,12 +75,15 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		List<EmployeeDTO> response = employee.stream().map(employeeDTO -> {
 			return new EmployeeDTO(employeeDTO.getCedula(), employeeDTO.getCreateAt(), employeeDTO.getCultivo(),
 					employeeDTO.getEdad(), employeeDTO.getFinca(), employeeDTO.getHorario(), employeeDTO.getNombre(),
-					employeeDTO.getSueldo(), employeeDTO.getApellido(),employeeDTO.getEmail(), employeeDTO.getCargo());
+					employeeDTO.getSueldo(), employeeDTO.getApellido(), employeeDTO.getEmail(), employeeDTO.getCargo());
 		}).collect(Collectors.toList());
+		for (int i = 0; i < response.size(); i++) {
+			response.get(i).setNombreCultivo(cultivoDao.findById(response.get(i).getCultivo()).get().getTipoCultivo());
+		}
 
 		return response;
 	}
-	
+
 	@Override
 	public EmployeeDTO findById(Long cedula) {
 

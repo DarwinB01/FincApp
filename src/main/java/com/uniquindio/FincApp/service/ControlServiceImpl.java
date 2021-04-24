@@ -38,7 +38,9 @@ public class ControlServiceImpl implements IControlService {
 					controlnDTO.getDescripcion(), controlnDTO.getFecha(), controlnDTO.getPrecio(),
 					controlnDTO.getCultivo().getIdcultivo());
 		}).collect(Collectors.toList());
-
+		for (int i = 0; i < response.size(); i++) {
+			response.get(i).setNombreCultivo(cultivoDao.findById(response.get(i).getCultivo()).get().getTipoCultivo());
+		}
 		return response;
 	}
 
