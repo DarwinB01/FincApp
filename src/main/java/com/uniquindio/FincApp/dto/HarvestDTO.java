@@ -26,6 +26,8 @@ public class HarvestDTO {
 	private Long valor;
 
 	private Long cultivo;
+	
+	private String nombreCultivo;
 
 	public HarvestDTO(Long idcosecha, int cantidad, Date fecha, Long valor, Cultivation cultivation) {
 		super();
@@ -34,6 +36,14 @@ public class HarvestDTO {
 		this.fecha = fecha;
 		this.valor = valor;
 		this.cultivo = cultivation.getIdcultivo();
+	}
+	
+	public String getNombreCultivo() {
+		return nombreCultivo;
+	}
+
+	public void setNombreCultivo(String nombreCultivo) {
+		this.nombreCultivo = nombreCultivo;
 	}
 
 	public HarvestDTO() {

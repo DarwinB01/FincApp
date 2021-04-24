@@ -39,7 +39,9 @@ public class HaverstServiceImpl implements IHaverstService {
 			return new HarvestDTO(cosechaDTO.getIdcosecha(), cosechaDTO.getCantidad(),
 					cosechaDTO.getFecha(), cosechaDTO.getValor(), cosechaDTO.getCultivo());
 		}).collect(Collectors.toList());
-
+		for (int i = 0; i < response.size(); i++) {
+			response.get(i).setNombreCultivo(cultivoDao.findById(response.get(i).getCultivo()).get().getTipoCultivo());
+		}
 		return response;
 	}
 

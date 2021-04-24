@@ -39,6 +39,8 @@ public class EmployeeDTO {
 	private String email;
 	
 	private String cargo;
+	
+	private String nombreCultivo;
 
 	public EmployeeDTO() {
 		super();
@@ -60,6 +62,14 @@ public class EmployeeDTO {
 		this.email = email;
 		this.cargo = cargo;
 
+	}
+
+	public String getNombreCultivo() {
+		return nombreCultivo;
+	}
+
+	public void setNombreCultivo(String nombreCultivo) {
+		this.nombreCultivo = nombreCultivo;
 	}
 
 	public String getEmail() {
