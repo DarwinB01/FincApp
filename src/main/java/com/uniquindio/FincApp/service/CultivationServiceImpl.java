@@ -3,10 +3,8 @@ package com.uniquindio.FincApp.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniquindio.FincApp.dao.ICultivationDao;
 import com.uniquindio.FincApp.dto.CultivationDTO;
