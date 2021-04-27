@@ -1,5 +1,6 @@
 package com.uniquindio.FincApp.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniquindio.FincApp.dao.ICultivationDao;
 import com.uniquindio.FincApp.dto.CultivationDTO;
+import com.uniquindio.FincApp.dto.HarvestDTO;
 import com.uniquindio.FincApp.model.Cultivation;
 
 @Service
@@ -31,6 +33,12 @@ public class CultivationServiceImpl implements ICultivationService {
 			return new CultivationDTO(cultivoDTO.getIdcultivo(), cultivoDTO.getTipoCultivo(),
 					cultivoDTO.getCantidadDeMatas(), cultivoDTO.getFecha());
 		}).collect(Collectors.toList());
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd");
+		String fecha = "";
+		for (CultivationDTO harvest : response) {
+			fecha = sdf.format(harvest.getFecha());
+			harvest.setFechaFinal(fecha);
+		}
 
 		return response;
 	}

@@ -44,6 +44,9 @@ public class EmployeeHarvest implements Serializable {
 	@JoinColumn(name = "cultivo_idcultivo")
 	private Cultivation cultivo;
 
+	@Column(nullable = true)
+	private String telefono;
+
 	public Long getCedula() {
 		return cedula;
 	}
@@ -98,6 +101,14 @@ public class EmployeeHarvest implements Serializable {
 
 	public void setCultivo(Cultivation cultivo) {
 		this.cultivo = cultivo;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 }

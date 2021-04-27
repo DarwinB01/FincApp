@@ -61,6 +61,7 @@ public class EmployeeHarvestController {
 				employeeDTO.setPagoPorDia(peticion.getPagoPorDia());
 				employeeDTO.setDiasDeTrabajo(peticion.getDiasDeTrabajo());
 				employeeDTO.setCultivo(peticion.getCultivo());
+				employeeDTO.setTelefono(peticion.getTelefono());
 
 				employeeUpdated = employeeService.saveEmployeeHarvest(employeeDTO);
 				return employeeUpdated;

@@ -66,6 +66,7 @@ public class EmployeeController {
 				employeeDTO.setEmail(peticion.getEmail());
 				employeeDTO.setCultivo(peticion.getCultivo());
 				employeeDTO.setCargo(peticion.getCargo());
+				employeeDTO.setTelefono(peticion.getTelefono());
 
 				employeeUpdated = employeeService.saveEmployee(employeeDTO);
 				return employeeUpdated;

@@ -1,5 +1,6 @@
 package com.uniquindio.FincApp.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniquindio.FincApp.dao.IControlDao;
 import com.uniquindio.FincApp.dao.ICultivationDao;
 import com.uniquindio.FincApp.dto.ControlDTO;
+import com.uniquindio.FincApp.dto.CultivationDTO;
 import com.uniquindio.FincApp.model.Control;
 import com.uniquindio.FincApp.model.Cultivation;
 
@@ -40,6 +42,12 @@ public class ControlServiceImpl implements IControlService {
 		}).collect(Collectors.toList());
 		for (int i = 0; i < response.size(); i++) {
 			response.get(i).setNombreCultivo(cultivoDao.findById(response.get(i).getCultivo()).get().getTipoCultivo());
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd");
+		String fecha = "";
+		for (ControlDTO harvest : response) {
+			fecha = sdf.format(harvest.getFecha());
+			harvest.setFechaFinal(fecha);
 		}
 		return response;
 	}

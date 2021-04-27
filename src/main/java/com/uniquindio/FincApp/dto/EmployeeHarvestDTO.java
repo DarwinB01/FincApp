@@ -31,8 +31,10 @@ public class EmployeeHarvestDTO {
 
 	private Long cultivo;
 
+	private String telefono;
+
 	public EmployeeHarvestDTO(Long cedula, String nombre, String apellido, Long pagoPorDia, int diasDeTrabajo,
-			Date fecha, Cultivation cultivo) {
+			Date fecha, Cultivation cultivo, String telefono) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -41,6 +43,7 @@ public class EmployeeHarvestDTO {
 		this.diasDeTrabajo = diasDeTrabajo;
 		this.fecha = fecha;
 		this.cultivo = cultivo.getIdcultivo();
+		this.telefono = telefono;
 	}
 
 	public EmployeeHarvestDTO() {
@@ -101,6 +104,14 @@ public class EmployeeHarvestDTO {
 
 	public void setCultivo(Long cultivo) {
 		this.cultivo = cultivo;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 }
