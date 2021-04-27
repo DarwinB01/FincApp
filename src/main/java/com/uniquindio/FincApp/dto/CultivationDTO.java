@@ -15,6 +15,8 @@ public class CultivationDTO {
 	private int cantidadDeMatas;
 
 	private Date fecha;
+	
+	private String fechaFinal;
 
 	public CultivationDTO(Long idcultivo, String tipoCultivo, int cantidadDeMatas, Date fecha) {
 		super();
@@ -58,6 +60,14 @@ public class CultivationDTO {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getFechaFinal() {
+		return fechaFinal;
+	}
+
+	public void setFechaFinal(String fechaFinal) {
+		this.fechaFinal = fechaFinal;
 	}
 
 }

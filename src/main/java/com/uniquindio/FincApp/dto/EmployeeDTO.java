@@ -37,17 +37,19 @@ public class EmployeeDTO {
 	private Date createAt;
 
 	private String email;
-	
+
 	private String cargo;
-	
+
 	private String nombreCultivo;
+
+	private String telefono;
 
 	public EmployeeDTO() {
 		super();
 	}
 
 	public EmployeeDTO(Long cedula, Date createAt, Cultivation cultivo, int edad, Estate finca, String horario,
-			String nombre, Long sueldo, String apellido, String email, String cargo) {
+			String nombre, Long sueldo, String apellido, String email, String cargo, String telefono) {
 
 		super();
 		this.cedula = cedula;
@@ -61,6 +63,7 @@ public class EmployeeDTO {
 		this.apellido = apellido;
 		this.email = email;
 		this.cargo = cargo;
+		this.telefono = telefono;
 
 	}
 
@@ -158,6 +161,14 @@ public class EmployeeDTO {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 }

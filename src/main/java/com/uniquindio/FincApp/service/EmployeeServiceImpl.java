@@ -54,6 +54,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 				employee.setApellido(employeeDTO.getApellido());
 				employee.setEmail(employeeDTO.getEmail());
 				employee.setCargo(employeeDTO.getCargo());
+				employee.setTelefono(employeeDTO.getTelefono());
 				employeeDao.save(employee);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -75,7 +76,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		List<EmployeeDTO> response = employee.stream().map(employeeDTO -> {
 			return new EmployeeDTO(employeeDTO.getCedula(), employeeDTO.getCreateAt(), employeeDTO.getCultivo(),
 					employeeDTO.getEdad(), employeeDTO.getFinca(), employeeDTO.getHorario(), employeeDTO.getNombre(),
-					employeeDTO.getSueldo(), employeeDTO.getApellido(), employeeDTO.getEmail(), employeeDTO.getCargo());
+					employeeDTO.getSueldo(), employeeDTO.getApellido(), employeeDTO.getEmail(), employeeDTO.getCargo(), employeeDTO.getTelefono());
 		}).collect(Collectors.toList());
 		for (int i = 0; i < response.size(); i++) {
 			response.get(i).setNombreCultivo(cultivoDao.findById(response.get(i).getCultivo()).get().getTipoCultivo());
@@ -103,6 +104,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		employeeDTO.setApellido(employee.getApellido());
 		employeeDTO.setEmail(employee.getEmail());
 		employeeDTO.setCargo(employee.getCargo());
+		employeeDTO.setTelefono(employee.getTelefono());
 
 		return employeeDTO;
 	}

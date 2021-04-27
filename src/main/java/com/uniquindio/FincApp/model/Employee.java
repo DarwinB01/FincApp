@@ -29,7 +29,7 @@ import com.sun.istack.NotNull;
  *
  */
 @Entity
-@Table(name = "t")
+@Table(name = "trabajador")
 public class Employee implements Serializable {
 
 	@Id
@@ -70,10 +70,13 @@ public class Employee implements Serializable {
 	@NotNull
 	@Column(nullable = false)
 	private String email;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String cargo;
+
+	@Column(nullable = true)
+	private String telefono;
 
 	public String getEmail() {
 		return email;
@@ -161,6 +164,14 @@ public class Employee implements Serializable {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 }

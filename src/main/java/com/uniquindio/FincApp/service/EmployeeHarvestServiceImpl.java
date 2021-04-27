@@ -34,7 +34,7 @@ public class EmployeeHarvestServiceImpl implements IEmployeeHarvestService {
 		employeeHarvestDao.findAll().forEach(employee::add);
 		List<EmployeeHarvestDTO> response = employee.stream().map(employeeDTO -> {
 			return new EmployeeHarvestDTO(employeeDTO.getCedula(), employeeDTO.getNombre(), employeeDTO.getApellido(),
-					employeeDTO.getPagoPorDia(),employeeDTO.getDiasDeTrabajo(), employeeDTO.getFecha(), employeeDTO.getCultivo());
+					employeeDTO.getPagoPorDia(),employeeDTO.getDiasDeTrabajo(), employeeDTO.getFecha(), employeeDTO.getCultivo(), employeeDTO.getTelefono());
 		}).collect(Collectors.toList());
 
 		return response;
@@ -59,7 +59,8 @@ public class EmployeeHarvestServiceImpl implements IEmployeeHarvestService {
 				employee.setNombre(employeeDTO.getNombre());
 				employee.setPagoPorDia(employeeDTO.getPagoPorDia());
 				employee.setApellido(employeeDTO.getApellido());
-				employee.setDiasDeTrabajo(employeeDTO.getDiasDeTrabajo());			
+				employee.setDiasDeTrabajo(employeeDTO.getDiasDeTrabajo());
+				employee.setTelefono(employeeDTO.getTelefono());
 				employeeHarvestDao.save(employee);
 			} catch (Exception e) {
 				e.printStackTrace();
